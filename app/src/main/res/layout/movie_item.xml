@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:src="@drawable/movie_poster"
+            android:scaleType="centerCrop"
+            android:layout_margin="2dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/movieImage"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:layout_below="@id/movieImage"
+            android:textColor="#fff"
+            android:layout_centerHorizontal="true"
+            android:text="Blade Runner 2049"
+            android:id="@+id/movieName"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/movieName"
+            android:textColor="#CDC7C7"
+            android:textSize="10dp"
+            android:layout_margin="5dp"
+            android:layout_centerHorizontal="true"
+            android:text="Action | Thriller | Drama"
+            android:id="@+id/movieGenre"/>
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style = "?android:attr/ratingBarStyleSmall"
+            android:rating="4"
+            android:layout_marginBottom="5dp"
+            android:stepSize="0.5"
+            android:numStars="5"
+            android:theme="@style/RatingBar"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/movieGenre"/>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
