@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:background="@color/colorPrimaryDark"
+            android:layout_width="match_parent" android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/searchLayout">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:id="@+id/searchKeyword"
+                    android:textColor="#fff"
+                    android:hint="Search"
+                    android:paddingLeft="20dp"
+                    android:background="@drawable/search_edit_text_bg"
+                    android:layout_toLeftOf="@id/filterSearch"
+                    android:layout_margin="25dp"/>
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/filterSearch"
+                    android:src="@drawable/ic_tune_black_24dp"/>
+            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:text="Currently Showing"
+                android:layout_below="@id/searchLayout"
+                android:layout_margin="10dp"
+                android:id="@+id/currentlyShowing"/>
+            <androidx.viewpager.widget.ViewPager
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@+id/currentlyShowing"
+                android:layout_margin="10dp"
+                android:id="@+id/currentlyShowingViewPager"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:text="Upcoming "
+                android:layout_below="@id/currentlyShowingViewPager"
+                android:layout_margin="10dp"
+                android:id="@+id/upcomingShowing"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/upcomingShowing"
+                android:layout_margin="10dp"
+                android:id="@+id/upcomingRecyclerView"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:text="Popular"
+                android:layout_below="@id/upcomingRecyclerView"
+                android:layout_margin="10dp"
+                android:id="@+id/popular"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/popular"
+                android:layout_margin="10dp"
+                android:id="@+id/popularRecyclerView"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:text="Top Rated"
+                android:layout_below="@id/popularRecyclerView"
+                android:layout_margin="10dp"
+                android:id="@+id/topRated"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/topRated"
+                android:layout_margin="10dp"
+                android:id="@+id/topRatedRecyclerView"/>
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

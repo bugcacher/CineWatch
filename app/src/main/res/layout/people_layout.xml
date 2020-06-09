@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:src="@drawable/ryan"
+        android:scaleType="centerCrop"
+        android:layout_height="500dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:id="@+id/peopleDetailsLayout"
+        android:background="@drawable/bg"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ryan Gosling"
+            android:textStyle="bold"
+            android:textSize="24dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="80dp"
+            android:textColor="#fff"
+            android:id="@+id/actorName"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12 November 1980"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_below="@id/actorName"
+            android:textColor="#fff"
+            android:id="@+id/actorBirthday"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ontario Canada"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@id/actorBirthday"
+            android:textColor="#fff"
+            android:id="@+id/actorPlace"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bio"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_below="@id/actorPlace"
+            android:textColor="#fff"
+            android:id="@+id/actorBioText"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ryan Thomas Gosling is a Canadian actor and musician. He began his career as a child star on the Disney Channel's The Mickey Mouse Club, and went on to appear in other family entertainment programs, including Are You Afraid of the Dark? and Goosebumps."
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@id/actorBioText"
+            android:textColor="#fff"
+            android:id="@+id/actorBio"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Known For"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_below="@id/actorBio"
+            android:textColor="#fff"
+            android:id="@+id/knownForText"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/knownForRecyclerView"
+            android:layout_below="@id/knownForText"/>
+    </RelativeLayout>
+
+</RelativeLayout>

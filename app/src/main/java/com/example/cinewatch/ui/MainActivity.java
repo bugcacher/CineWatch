@@ -1,4 +1,4 @@
-package com.example.cinewatch;
+package com.example.cinewatch.ui;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,8 +12,13 @@ import android.view.ViewOutlineProvider;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.example.cinewatch.databinding.ActivityMainBinding;
+import com.example.cinewatch.databinding.MovieDetailsBinding;
+
+import me.ibrahimsn.lib.SmoothBottomBar;
+
 public class MainActivity extends AppCompatActivity {
-    ImageView imageView;
+    ActivityMainBinding binding;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -21,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.movie_details);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
 
     }
 }

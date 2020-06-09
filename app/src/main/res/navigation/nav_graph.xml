@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/home3">
+    <fragment
+        android:id="@+id/home3"
+        android:name="com.example.cinewatch.ui.Fragments.Home"
+        android:label="Home" >
+        <action
+            android:id="@+id/action_home3_to_movieDetails"
+            app:destination="@id/movieDetails" />
+        <action
+            android:id="@+id/action_home3_to_movies"
+            app:destination="@id/movies" />
+    </fragment>
+    <fragment
+        android:id="@+id/movies"
+        android:name="com.example.cinewatch.ui.Fragments.Movies"
+        android:label="Movies" >
+        <action
+            android:id="@+id/action_movies_to_movieDetails"
+            app:destination="@id/movieDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/actorDetails"
+        android:name="com.example.cinewatch.ui.Fragments.ActorDetails"
+        android:label="ActorDetails" >
+        <action
+            android:id="@+id/action_actorDetails_to_movieDetails2"
+            app:destination="@id/movieDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetails"
+        android:name="com.example.cinewatch.ui.Fragments.MovieDetails"
+        android:label="MovieDetails" >
+        <action
+            android:id="@+id/action_movieDetails_to_actorDetails"
+            app:destination="@id/actorDetails" />
+    </fragment>
+</navigation>

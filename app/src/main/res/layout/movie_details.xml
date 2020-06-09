@@ -14,11 +14,11 @@
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="600dp"
+                            android:layout_height="450dp"
                             android:background="@drawable/movie_poster"
                             android:adjustViewBounds="true"
                             android:id="@+id/moviePoster"
-                            android:scaleType="centerCrop"
+                            android:scaleType="centerInside"
                             android:src="@drawable/frame"
                             />
                         <ImageView
