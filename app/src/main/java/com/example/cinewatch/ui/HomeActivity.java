@@ -17,7 +17,7 @@ import com.example.cinewatch.databinding.MovieDetailsBinding;
 
 import me.ibrahimsn.lib.SmoothBottomBar;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
     ActivityMainBinding binding;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

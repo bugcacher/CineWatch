@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/colorPrimaryDark"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.HomeActivity">
 
     <fragment
         android:id="@+id/fragment"

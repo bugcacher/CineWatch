@@ -13,3 +13,4 @@
 .externalNativeBuild
 .cxx
 /app/src/main/res/values/strings.xml
+/app/src/main/java/com/example/cinewatch/Utils/Constants.java

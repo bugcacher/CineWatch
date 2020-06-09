@@ -2,7 +2,6 @@ package com.example.cinewatch.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -13,11 +12,11 @@ import com.example.cinewatch.databinding.MovieItemBinding;
 /**
  * Created by Abhinav Singh on 09,June,2020
  */
-public class homeRecyclerViewAdapter extends RecyclerView.Adapter<homeRecyclerViewAdapter.HomeRecyclerViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeRecyclerViewHolder> {
     private Context mContext;
     private MovieItemBinding binding;
 
-    public homeRecyclerViewAdapter(Context mContext) {
+    public HomeAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
