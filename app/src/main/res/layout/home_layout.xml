@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,13 +22,16 @@
                     android:paddingLeft="20dp"
                     android:background="@drawable/search_edit_text_bg"
                     android:layout_toLeftOf="@id/filterSearch"
-                    android:layout_margin="25dp"/>
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginLeft="25dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="25dp"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="45dp"
                     android:id="@+id/filterSearch"
                     android:src="@drawable/ic_tune_black_24dp"/>
             </RelativeLayout>
@@ -95,6 +99,59 @@
                 android:layout_below="@+id/topRated"
                 android:layout_margin="10dp"
                 android:id="@+id/topRatedRecyclerView"/>
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_margin="10dp"
+                android:layout_below="@id/topRatedRecyclerView"
+                android:id="@+id/relativeLayout"
+                android:background="@drawable/background"
+                android:layout_width="wrap_content" android:layout_height="250dp">
+                <ImageView
+                    android:layout_width="190dp"
+                    android:layout_height="250dp"
+                    android:src="@drawable/bloodshot"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/movieItemImage"/>
+                <RelativeLayout
+                    android:layout_width="190dp"
+                    android:id="@+id/detailsLayout"
+                    android:background="@color/colorPrimaryDark"
+                    android:alpha="0.9"
+                    android:layout_alignParentBottom="true"
+                    android:layout_height="50dp">
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:text="Bloodshot"
+                        android:textColor="#fff"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/movieItemName"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_toRightOf="@id/movieItemName"
+                        android:src="@drawable/ic_like"
+                        android:layout_marginLeft="0dp"
+                        android:layout_centerVertical="true"
+                        android:layout_height="20dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:textSize="14dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="13dp"
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold"
+                        android:text="1.2K"/>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>

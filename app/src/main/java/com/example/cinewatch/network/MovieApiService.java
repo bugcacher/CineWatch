@@ -9,19 +9,21 @@ import com.google.gson.JsonObject;
 import java.util.HashMap;
 import java.util.List;
 
+import io.reactivex.observers.DisposableObserver;
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 /**
  * Created by Abhinav Singh on 09,June,2020
  */
-public interface MovieApiInterface {
+public interface MovieApiService {
 
     @GET("movie/now_playing")
-    Call<MovieResponse> getCurrentlyShowing(@QueryMap HashMap<String,String> queries);
+    Observable<MovieResponse> getCurrentlyShowing(@QueryMap HashMap<String,String> queries);
 
     @GET("movie/popular")
     Observable<List<MovieResponse>> getPopular(@QueryMap HashMap<String,String> queries);
@@ -33,13 +35,13 @@ public interface MovieApiInterface {
     Observable<List<MovieResponse>> getTopRated(@QueryMap HashMap<String,String> queries);
 
     @GET("movie/{movie_id}")
-    Call<MovieListResult> getMovieDetails(@Path ("movie_id") int id, @QueryMap HashMap<String,String> queries);
+    Observable<MovieListResult> getMovieDetails(@Path ("movie_id") int id, @QueryMap HashMap<String,String> queries);
 
     @GET("movie/{movie_id}/credits")
-    Call<JsonObject> getCast(@Path ("movie_id") int id, @QueryMap HashMap<String,String> queries);
+    Observable<JsonObject> getCast(@Path ("movie_id") int id, @QueryMap HashMap<String,String> queries);
 
-    @GET("/person/{person_id}")
-    Call<Actor> getActorDetails(@Path ("person_id") int id, @QueryMap HashMap<String,String> queries);
+    @GET("person/{person_id}")
+    Observable<Actor> getActorDetails(@Path ("person_id") int id, @Query("api_key") String api);
 
 
 

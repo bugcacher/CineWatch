@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="10dp"
+    android:background="@drawable/background"
+    android:layout_width="wrap_content" android:layout_height="250dp">
+<ImageView
+    android:layout_width="190dp"
+    android:layout_height="250dp"
+    android:src="@drawable/bloodshot"
+    android:scaleType="centerCrop"
+    android:id="@+id/movieItemImage"/>
+    <RelativeLayout
+        android:layout_width="190dp"
+        android:id="@+id/detailsLayout"
+        android:background="@color/colorPrimaryDark"
+        android:alpha="0.95"
+        android:layout_alignParentBottom="true"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Bloodshot"
+            android:textColor="#fff"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/movieItemName"/>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_toRightOf="@id/movieItemName"
+            android:src="@drawable/ic_like"
+            android:layout_marginLeft="0dp"
+            android:layout_centerVertical="true"
+            android:layout_height="20dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="14dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="13dp"
+            android:layout_alignParentRight="true"
+            android:textStyle="bold"
+            android:text="1.2K"/>
+    </RelativeLayout>
+
+</RelativeLayout>
