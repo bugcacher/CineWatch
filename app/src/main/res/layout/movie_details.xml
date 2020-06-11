@@ -15,24 +15,21 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="450dp"
-                            android:background="@drawable/movie_poster"
                             android:adjustViewBounds="true"
                             android:id="@+id/moviePoster"
-                            android:scaleType="centerInside"
-                            android:src="@drawable/frame"
                             />
                         <ImageView
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:layout_below="@id/moviePoster"
-                            android:layout_marginTop="-40dp"
+                            android:visibility="gone"
+                            android:layout_marginTop="-50dp"
                             android:layout_centerHorizontal="true"
                             android:src="@drawable/ic_play_circle_filled_black_24dp"
                             android:id="@+id/playTrailer"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:id="@+id/movieName"
-                            android:text="Blade Runner 2049"
                             android:textColor="#fff"
                             android:layout_marginRight="10dp"
                             android:textSize="22dp"
@@ -44,7 +41,6 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:id="@+id/movieGenre"
-                            android:text="Action | Thriller | Drama"
                             android:textColor="#fff"
                             android:textSize="14dp"
                             android:layout_below="@id/movieName"
@@ -54,7 +50,6 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:id="@+id/movieRuntime"
-                            android:text="2h 32min"
                             android:textColor="#fff"
                             android:textSize="14dp"
                             android:layout_below="@id/movieGenre"
@@ -68,6 +63,7 @@
                             android:textColor="#fff"
                             android:textSize="18dp"
                             android:textStyle="bold"
+                            android:visibility="gone"
                             android:layout_below="@id/movieRuntime"
                             android:layout_marginTop="10dp"
                             android:layout_marginLeft="10dp"
@@ -75,7 +71,6 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:id="@+id/moviePlot"
-                            android:text="K, an officer with the Los Angeles Police Department, unearths a secret that could cause chaos. He goes in search of a former blade runner who has been missing for three decades."
                             android:textColor="#fff"
                             android:layout_below="@id/moviePlotText"
                             android:layout_marginTop="10dp"
@@ -86,6 +81,7 @@
                             android:layout_width="wrap_content"
                             android:id="@+id/movieCastText"
                             android:text="Cast and Crew"
+                            android:visibility="gone"
                             android:textColor="#fff"
                             android:textSize="18dp"
                             android:textStyle="bold"

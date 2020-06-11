@@ -6,7 +6,9 @@ import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.cinewatch.Utils.Constants;
 import com.example.cinewatch.model.Cast;
+import com.example.cinewatch.model.Genre;
 import com.example.cinewatch.repository.Repository;
 import com.example.cinewatch.model.Actor;
 import com.example.cinewatch.model.MovieListResult;
@@ -37,7 +39,7 @@ public class HomeViewModel extends ViewModel {
     private MutableLiveData<ArrayList<MovieListResult>> popularMoviesList = new MutableLiveData<>();
     private MutableLiveData<ArrayList<MovieListResult>> topRatedMoviesList = new MutableLiveData<>();
     private MutableLiveData<ArrayList<MovieListResult>> upcomingMoviesList = new MutableLiveData<>();
-    private MutableLiveData<ArrayList<Actor>> movieCastList = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Cast>> movieCastList = new MutableLiveData<>();
     private MutableLiveData<MovieListResult> movieDetails = new MutableLiveData<>();
     private MutableLiveData<Actor> actorDetails = new MutableLiveData<>();
 
@@ -72,7 +74,7 @@ public class HomeViewModel extends ViewModel {
         return actorDetails;
     }
 
-    public MutableLiveData<ArrayList<Actor>> getMovieCastList() {
+    public MutableLiveData<ArrayList<Cast>> getMovieCastList() {
         return movieCastList;
     }
 
@@ -136,6 +138,17 @@ public class HomeViewModel extends ViewModel {
     public void getMovieDetails(int movieId, HashMap<String, String> map) {
         disposables.add(repository.getMovieDetails(movieId, map)
                 .subscribeOn(Schedulers.io())
+                .map(new Function<MovieListResult, MovieListResult>() {
+                    @Override
+                    public MovieListResult apply(MovieListResult movieListResult) throws Throwable {
+                        ArrayList<String> genreNames = new ArrayList<>();
+                        for(Genre genre : movieListResult.getGenres()){
+                            genreNames.add(genre.getName());
+                        }
+                        movieListResult.setGenre_names(genreNames);
+                        return movieListResult;
+                    }
+                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> movieDetails.setValue(result),
                         error -> Log.e(TAG, "getMovieDetails: " + error.getMessage()))
@@ -145,9 +158,9 @@ public class HomeViewModel extends ViewModel {
     public void getCast(int movieId, HashMap<String, String> map) {
         disposables.add(repository.getCast(movieId, map)
                 .subscribeOn(Schedulers.io())
-                .map(new Function<JsonObject, ArrayList<Actor>>() {
+                .map(new Function<JsonObject, ArrayList<Cast>>() {
                     @Override
-                    public ArrayList<Actor> apply(JsonObject jsonObject) throws Throwable {
+                    public ArrayList<Cast> apply(JsonObject jsonObject) throws Throwable {
                         JsonArray jsonArray = jsonObject.getAsJsonArray("cast");
                         return  new Gson().fromJson(jsonArray.toString(), new TypeToken<ArrayList<Cast>>(){}.getType());
                     }

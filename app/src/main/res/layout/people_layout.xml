@@ -1,23 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/peopleRelativeLayout"
     android:layout_width="match_parent" android:layout_height="match_parent">
     <ImageView
         android:layout_width="match_parent"
-        android:src="@drawable/ryan"
         android:scaleType="centerCrop"
+        android:id="@+id/actorImage"
         android:layout_height="500dp"
         />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="350dp"
         android:id="@+id/peopleDetailsLayout"
         android:background="@drawable/bg"
         android:layout_alignParentBottom="true">
+        <ImageView
+            android:layout_width="30dp"
+            android:src="@drawable/ic_hea"
+            android:visibility="gone"
+            android:layout_below="@id/actorName"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:id="@+id/popularityIcon"
+            android:layout_height="30dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ryan Gosling"
+            android:layout_below="@id/popularityIcon"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25dp"
+            android:textColor="#fff"
+            android:textSize="16dp"
+            android:id="@+id/actorPopularity"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="24dp"
             android:layout_marginTop="30dp"
@@ -28,7 +47,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12 November 1980"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="50dp"
             android:layout_below="@id/actorName"
@@ -38,7 +56,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ontario Canada"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="30dp"
             android:layout_below="@id/actorBirthday"
@@ -49,6 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bio"
+            android:visibility="gone"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:textStyle="bold"
@@ -60,7 +78,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ryan Thomas Gosling is a Canadian actor and musician. He began his career as a child star on the Disney Channel's The Mickey Mouse Club, and went on to appear in other family entertainment programs, including Are You Afraid of the Dark? and Goosebumps."
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
@@ -75,6 +92,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:textStyle="bold"
+            android:visibility="gone"
             android:textSize="18dp"
             android:layout_below="@id/actorBio"
             android:textColor="#fff"

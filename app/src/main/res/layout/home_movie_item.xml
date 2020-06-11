@@ -2,37 +2,40 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_margin="10dp"
     android:background="@drawable/background"
+    android:id="@+id/movieItemRelativeLayout"
     android:layout_width="wrap_content" android:layout_height="250dp">
 <ImageView
-    android:layout_width="190dp"
+    android:layout_width="150dp"
     android:layout_height="250dp"
     android:src="@drawable/bloodshot"
     android:scaleType="centerCrop"
     android:id="@+id/movieItemImage"/>
     <RelativeLayout
-        android:layout_width="190dp"
+        android:layout_width="150dp"
         android:id="@+id/detailsLayout"
         android:background="@color/colorPrimaryDark"
         android:alpha="0.95"
         android:layout_alignParentBottom="true"
         android:layout_height="50dp">
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="Bloodshot"
             android:textColor="#fff"
-            android:textSize="16dp"
+            android:textSize="10dp"
+            android:maxLines="3"
+            android:ellipsize="end"
             android:textStyle="bold"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:layout_centerVertical="true"
             android:id="@+id/movieItemName"/>
         <ImageView
             android:layout_width="20dp"
-            android:layout_toRightOf="@id/movieItemName"
             android:src="@drawable/ic_like"
-            android:layout_marginLeft="0dp"
+            android:layout_toLeftOf="@id/movieItemVotes"
+            android:layout_marginRight="8dp"
             android:layout_centerVertical="true"
             android:layout_height="20dp"
             />
@@ -40,9 +43,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-            android:textSize="14dp"
+            android:id="@+id/movieItemVotes"
+            android:textSize="12dp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="13dp"
+            android:layout_marginRight="6dp"
             android:layout_alignParentRight="true"
             android:textStyle="bold"
             android:text="1.2K"/>

@@ -19,9 +19,12 @@ import com.example.cinewatch.viewmodel.HomeViewModel;
 
 import java.util.HashMap;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
 /**
  * Created by Abhinav Singh on 09,June,2020
  */
+@AndroidEntryPoint
 public class Movies extends Fragment {
     private MoviesBinding binding;
     private HomeViewModel viewModel;
@@ -40,6 +43,7 @@ public class Movies extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        queryMap = new HashMap<>();
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         viewModel.getMovie().observe(getViewLifecycleOwner(), new Observer<MovieListResult>() {

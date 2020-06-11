@@ -13,8 +13,11 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cinewatch.Utils.Constants;
+import com.example.cinewatch.adapters.HomeMoviesAdapter;
 import com.example.cinewatch.databinding.HomeLayoutBinding;
 import com.example.cinewatch.model.Actor;
 import com.example.cinewatch.model.MovieListResult;
@@ -35,6 +38,8 @@ public class Home extends Fragment {
     private static final String TAG = "Home";
     private HomeViewModel viewModel;
     private HomeLayoutBinding binding;
+    private ArrayList<MovieListResult> currentMovies,popularMovies,topRatedMovies,upcomingMovies;
+    private HomeMoviesAdapter upcomingAdapter,popularAdapter,topRatedAdapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,6 +53,12 @@ public class Home extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        currentMovies = new ArrayList<>();
+        currentMovies = new ArrayList<>();
+        currentMovies = new ArrayList<>();
+        currentMovies = new ArrayList<>();
+
         viewModel = new ViewModelProvider(Home.this).get(HomeViewModel.class);
 
         observeData();
@@ -60,6 +71,8 @@ public class Home extends Fragment {
         viewModel.getUpcomingMovies(map);
         viewModel.getTopRatedMovies(map);
         viewModel.getPopularMovies(map);
+
+        setUpRecyclerViews();
 
 //        Call<MovieListResult> call= service.getMovieDetails(496243,map);
 //        call.enqueue(new Callback<MovieListResult>() {
@@ -117,8 +130,22 @@ public class Home extends Fragment {
 //                Log.e(TAG, "onFailure: " + t.getMessage() );
 //            }
 //        });
-        binding.relativeLayout.setClipToOutline(true);
 
+
+    }
+
+    private void setUpRecyclerViews() {
+        binding.upcomingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false));
+        upcomingAdapter = new HomeMoviesAdapter(getContext(),upcomingMovies);
+        binding.upcomingRecyclerView.setAdapter(upcomingAdapter);
+
+        binding.topRatedRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false));
+        topRatedAdapter = new HomeMoviesAdapter(getContext(),topRatedMovies);
+        binding.topRatedRecyclerView.setAdapter(topRatedAdapter);
+
+        binding.popularRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false));
+        popularAdapter = new HomeMoviesAdapter(getContext(),popularMovies);
+        binding.popularRecyclerView.setAdapter(popularAdapter);
     }
 
     private void observeData() {
@@ -129,26 +156,29 @@ public class Home extends Fragment {
                 Log.e(TAG, "onChanged: " + movieListResults.get(0).getTitle() );
             }
         });
-        viewModel.getPopularMoviesList().observe(getViewLifecycleOwner(), new Observer<ArrayList<MovieListResult>>() {
+        viewModel.getUpcomingMoviesList().observe(getViewLifecycleOwner(), new Observer<ArrayList<MovieListResult>>() {
             @Override
             public void onChanged(ArrayList<MovieListResult> movieListResults) {
                 Log.e(TAG, "onChanged: " + movieListResults.get(0).getTitle() );
+                upcomingAdapter.setMoviesList(movieListResults);
             }
         });
         viewModel.getTopRatedMoviesList().observe(getViewLifecycleOwner(), new Observer<ArrayList<MovieListResult>>() {
             @Override
             public void onChanged(ArrayList<MovieListResult> movieListResults) {
                 Log.e(TAG, "onChanged: " + movieListResults.get(0).getTitle() );
+                topRatedAdapter.setMoviesList(movieListResults);
+
             }
         });
         viewModel.getPopularMoviesList().observe(getViewLifecycleOwner(), new Observer<ArrayList<MovieListResult>>() {
             @Override
             public void onChanged(ArrayList<MovieListResult> movieListResults) {
                 Log.e(TAG, "onChanged: " + movieListResults.get(0).getTitle() );
+                popularAdapter.setMoviesList(movieListResults);
+
             }
         });
-
-
 
     }
 
