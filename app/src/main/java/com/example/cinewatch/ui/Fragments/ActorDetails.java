@@ -8,15 +8,24 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.example.cinewatch.Utils.Constants;
 import com.example.cinewatch.databinding.HomeLayoutBinding;
 import com.example.cinewatch.databinding.PeopleLayoutBinding;
+import com.example.cinewatch.model.Actor;
+import com.example.cinewatch.viewmodel.HomeViewModel;
+
+import java.util.HashMap;
 
 /**
  * Created by Abhinav Singh on 09,June,2020
  */
 public class ActorDetails extends Fragment {
     private PeopleLayoutBinding binding;
+    private HomeViewModel viewModel;
+    private Integer personID;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,6 +37,16 @@ public class ActorDetails extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+
+        viewModel.getActor().observe(getViewLifecycleOwner(), new Observer<Actor>() {
+            @Override
+            public void onChanged(Actor actor) {
+
+            }
+        });
+
+        viewModel.getActorDetails(personID, Constants.API_KEY);
 
     }
 

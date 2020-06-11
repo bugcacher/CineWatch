@@ -21,8 +21,10 @@ import com.example.cinewatch.viewmodel.HomeViewModel;
 
 import java.util.ArrayList;
 
+import dagger.hilt.android.AndroidEntryPoint;
 import me.ibrahimsn.lib.SmoothBottomBar;
 
+@AndroidEntryPoint
 public class HomeActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     HomeViewModel viewModel;

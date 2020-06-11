@@ -26,13 +26,13 @@ public interface MovieApiService {
     Observable<MovieResponse> getCurrentlyShowing(@QueryMap HashMap<String,String> queries);
 
     @GET("movie/popular")
-    Observable<List<MovieResponse>> getPopular(@QueryMap HashMap<String,String> queries);
+    Observable<MovieResponse> getPopular(@QueryMap HashMap<String,String> queries);
 
     @GET("movie/upcoming")
-    Observable<List<MovieResponse>> getUpcoming(@QueryMap HashMap<String,String> queries);
+    Observable<MovieResponse> getUpcoming(@QueryMap HashMap<String,String> queries);
 
     @GET("movie/top_rated")
-    Observable<List<MovieResponse>> getTopRated(@QueryMap HashMap<String,String> queries);
+    Observable<MovieResponse> getTopRated(@QueryMap HashMap<String,String> queries);
 
     @GET("movie/{movie_id}")
     Observable<MovieListResult> getMovieDetails(@Path ("movie_id") int id, @QueryMap HashMap<String,String> queries);

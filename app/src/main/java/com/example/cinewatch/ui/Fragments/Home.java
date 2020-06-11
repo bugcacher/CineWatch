@@ -14,24 +14,24 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.cinewatch.Repository;
 import com.example.cinewatch.Utils.Constants;
 import com.example.cinewatch.databinding.HomeLayoutBinding;
+import com.example.cinewatch.model.Actor;
 import com.example.cinewatch.model.MovieListResult;
-import com.example.cinewatch.network.MovieApiService;
 import com.example.cinewatch.viewmodel.HomeViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import dagger.hilt.android.AndroidEntryPoint;
 
 /**
  * Created by Abhinav Singh on 09,June,2020
  */
+
+@AndroidEntryPoint
 public class Home extends Fragment {
+
     private static final String TAG = "Home";
     private HomeViewModel viewModel;
     private HomeLayoutBinding binding;
@@ -49,24 +49,17 @@ public class Home extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(Home.this).get(HomeViewModel.class);
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(Constants.BaseURL)
-//                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//         MovieApiService service = retrofit.create(MovieApiService.class);
+
+        observeData();
 
         HashMap<String,String> map = new HashMap<>();
         map.put("api_key",Constants.API_KEY);
         map.put("page","1");
-        viewModel.currentlyShowingList().observe(getViewLifecycleOwner(), new Observer<ArrayList<MovieListResult>>() {
-            @Override
-            public void onChanged(ArrayList<MovieListResult> movieListResults) {
-                Log.e(TAG, "onChanged: " + movieListResults.get(0).getTitle() );
-            }
-        });
 
-        viewModel.getCurrentlyShowingMovieList(map);
+        viewModel.getCurrentlyShowingMovies(map);
+        viewModel.getUpcomingMovies(map);
+        viewModel.getTopRatedMovies(map);
+        viewModel.getPopularMovies(map);
 
 //        Call<MovieListResult> call= service.getMovieDetails(496243,map);
 //        call.enqueue(new Callback<MovieListResult>() {
@@ -125,6 +118,37 @@ public class Home extends Fragment {
 //            }
 //        });
         binding.relativeLayout.setClipToOutline(true);
+
+    }
+
+    private void observeData() {
+
+        viewModel.getCurrentlyShowingList().observe(getViewLifecycleOwner(), new Observer<ArrayList<MovieListResult>>() {
+            @Override
+            public void onChanged(ArrayList<MovieListResult> movieListResults) {
+                Log.e(TAG, "onChanged: " + movieListResults.get(0).getTitle() );
+            }
+        });
+        viewModel.getPopularMoviesList().observe(getViewLifecycleOwner(), new Observer<ArrayList<MovieListResult>>() {
+            @Override
+            public void onChanged(ArrayList<MovieListResult> movieListResults) {
+                Log.e(TAG, "onChanged: " + movieListResults.get(0).getTitle() );
+            }
+        });
+        viewModel.getTopRatedMoviesList().observe(getViewLifecycleOwner(), new Observer<ArrayList<MovieListResult>>() {
+            @Override
+            public void onChanged(ArrayList<MovieListResult> movieListResults) {
+                Log.e(TAG, "onChanged: " + movieListResults.get(0).getTitle() );
+            }
+        });
+        viewModel.getPopularMoviesList().observe(getViewLifecycleOwner(), new Observer<ArrayList<MovieListResult>>() {
+            @Override
+            public void onChanged(ArrayList<MovieListResult> movieListResults) {
+                Log.e(TAG, "onChanged: " + movieListResults.get(0).getTitle() );
+            }
+        });
+
+
 
     }
 

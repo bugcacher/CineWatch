@@ -1,48 +1,54 @@
 package com.example.cinewatch.viewmodel;
 
-import android.app.Application;
+import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
+import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.cinewatch.Repository;
+import com.example.cinewatch.model.Cast;
+import com.example.cinewatch.repository.Repository;
 import com.example.cinewatch.model.Actor;
 import com.example.cinewatch.model.MovieListResult;
 import com.example.cinewatch.model.MovieResponse;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.observers.DisposableObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 /**
  * Created by Abhinav Singh on 09,June,2020
  */
 public class HomeViewModel extends ViewModel {
+
     private Repository repository;
     private MutableLiveData<ArrayList<MovieListResult>> currentMoviesList = new MutableLiveData<>();
     private MutableLiveData<ArrayList<MovieListResult>> popularMoviesList = new MutableLiveData<>();
     private MutableLiveData<ArrayList<MovieListResult>> topRatedMoviesList = new MutableLiveData<>();
     private MutableLiveData<ArrayList<MovieListResult>> upcomingMoviesList = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Actor>> movieCastList = new MutableLiveData<>();
     private MutableLiveData<MovieListResult> movieDetails = new MutableLiveData<>();
     private MutableLiveData<Actor> actorDetails = new MutableLiveData<>();
 
     private final io.reactivex.rxjava3.disposables.CompositeDisposable disposables = new CompositeDisposable();
 
-    public HomeViewModel() {
-        repository = new Repository();
+    @ViewModelInject
+    public HomeViewModel(Repository repository) {
+        this.repository = repository;
     }
 
-    public MutableLiveData<ArrayList<MovieListResult>> currentlyShowingList(){
+    public MutableLiveData<ArrayList<MovieListResult>> getCurrentlyShowingList(){
         return currentMoviesList;
     }
 
@@ -58,22 +64,26 @@ public class HomeViewModel extends ViewModel {
         return upcomingMoviesList;
     }
 
-    public MutableLiveData<MovieListResult> getMovieDetails() {
+    public MutableLiveData<MovieListResult> getMovie() {
         return movieDetails;
     }
 
-    public MutableLiveData<Actor> getActorDetails() {
+    public MutableLiveData<Actor> getActor() {
         return actorDetails;
     }
 
-    public void getCurrentlyShowingMovieList(HashMap<String, String> map){
+    public MutableLiveData<ArrayList<Actor>> getMovieCastList() {
+        return movieCastList;
+    }
+
+
+    public void getCurrentlyShowingMovies(HashMap<String, String> map){
         disposables.add(repository.getCurrentlyShowing(map)
                 .subscribeOn(Schedulers.io())
                 .map(new Function<MovieResponse, ArrayList<MovieListResult>>() {
                     @Override
                     public ArrayList<MovieListResult> apply(MovieResponse movieResponse) throws Throwable {
-                        ArrayList<MovieListResult> listResults = movieResponse.getResults();
-                        return listResults;
+                        return movieResponse.getResults();
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -93,6 +103,67 @@ public class HomeViewModel extends ViewModel {
 
                     }
                 })
+        );
+    }
+
+    public void getPopularMovies(HashMap<String, String> map){
+        disposables.add(repository.getPopular(map)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(result->popularMoviesList.setValue(result.getResults()),
+                error-> Log.e(TAG, "getPopularMovies: " + error.getMessage() ))
+        );
+    }
+
+    public void getTopRatedMovies(HashMap<String, String> map) {
+        disposables.add(repository.getTopRated(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> topRatedMoviesList.setValue(result.getResults()),
+                        error -> Log.e(TAG, "getTopRated: " + error.getMessage()))
+        );
+    }
+
+    public void getUpcomingMovies(HashMap<String, String> map) {
+        disposables.add(repository.getUpcoming(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> upcomingMoviesList.setValue(result.getResults()),
+                        error -> Log.e(TAG, "getUpcoming: " + error.getMessage()))
+        );
+    }
+
+    public void getMovieDetails(int movieId, HashMap<String, String> map) {
+        disposables.add(repository.getMovieDetails(movieId, map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> movieDetails.setValue(result),
+                        error -> Log.e(TAG, "getMovieDetails: " + error.getMessage()))
+        );
+    }
+
+    public void getCast(int movieId, HashMap<String, String> map) {
+        disposables.add(repository.getCast(movieId, map)
+                .subscribeOn(Schedulers.io())
+                .map(new Function<JsonObject, ArrayList<Actor>>() {
+                    @Override
+                    public ArrayList<Actor> apply(JsonObject jsonObject) throws Throwable {
+                        JsonArray jsonArray = jsonObject.getAsJsonArray("cast");
+                        return  new Gson().fromJson(jsonArray.toString(), new TypeToken<ArrayList<Cast>>(){}.getType());
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> movieCastList.setValue(result),
+                        error -> Log.e(TAG, "getCastList: " + error.getMessage()))
+        );
+    }
+
+    public void getActorDetails(int personId, String api_key) {
+        disposables.add(repository.getActorDetails(personId, api_key)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> actorDetails.setValue(result),
+                        error -> Log.e(TAG, "getActorDetails: " + error.getMessage()))
         );
     }
 
