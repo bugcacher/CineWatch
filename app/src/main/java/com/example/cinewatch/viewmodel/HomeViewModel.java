@@ -7,11 +7,12 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.cinewatch.Utils.Constants;
+import com.example.cinewatch.db.MovieEntity;
 import com.example.cinewatch.model.Cast;
 import com.example.cinewatch.model.Genre;
 import com.example.cinewatch.repository.Repository;
 import com.example.cinewatch.model.Actor;
-import com.example.cinewatch.model.MovieListResult;
+import com.example.cinewatch.model.Movie;
 import com.example.cinewatch.model.MovieResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -35,12 +36,13 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class HomeViewModel extends ViewModel {
 
     private Repository repository;
-    private MutableLiveData<ArrayList<MovieListResult>> currentMoviesList = new MutableLiveData<>();
-    private MutableLiveData<ArrayList<MovieListResult>> popularMoviesList = new MutableLiveData<>();
-    private MutableLiveData<ArrayList<MovieListResult>> topRatedMoviesList = new MutableLiveData<>();
-    private MutableLiveData<ArrayList<MovieListResult>> upcomingMoviesList = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Movie>> currentMoviesList = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Movie>> popularMoviesList = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Movie>> topRatedMoviesList = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Movie>> upcomingMoviesList = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Movie>> queriesMovies = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Cast>> movieCastList = new MutableLiveData<>();
-    private MutableLiveData<MovieListResult> movieDetails = new MutableLiveData<>();
+    private MutableLiveData<Movie> movieDetails = new MutableLiveData<>();
     private MutableLiveData<Actor> actorDetails = new MutableLiveData<>();
 
     private final io.reactivex.rxjava3.disposables.CompositeDisposable disposables = new CompositeDisposable();
@@ -50,23 +52,23 @@ public class HomeViewModel extends ViewModel {
         this.repository = repository;
     }
 
-    public MutableLiveData<ArrayList<MovieListResult>> getCurrentlyShowingList(){
+    public MutableLiveData<ArrayList<Movie>> getCurrentlyShowingList(){
         return currentMoviesList;
     }
 
-    public MutableLiveData<ArrayList<MovieListResult>> getPopularMoviesList() {
+    public MutableLiveData<ArrayList<Movie>> getPopularMoviesList() {
         return popularMoviesList;
     }
 
-    public MutableLiveData<ArrayList<MovieListResult>> getTopRatedMoviesList() {
+    public MutableLiveData<ArrayList<Movie>> getTopRatedMoviesList() {
         return topRatedMoviesList;
     }
 
-    public MutableLiveData<ArrayList<MovieListResult>> getUpcomingMoviesList() {
+    public MutableLiveData<ArrayList<Movie>> getUpcomingMoviesList() {
         return upcomingMoviesList;
     }
 
-    public MutableLiveData<MovieListResult> getMovie() {
+    public MutableLiveData<Movie> getMovie() {
         return movieDetails;
     }
 
@@ -78,21 +80,35 @@ public class HomeViewModel extends ViewModel {
         return movieCastList;
     }
 
+    public MutableLiveData<ArrayList<Movie>> getQueriesMovies() {
+        return queriesMovies;
+    }
+
 
     public void getCurrentlyShowingMovies(HashMap<String, String> map){
         disposables.add(repository.getCurrentlyShowing(map)
                 .subscribeOn(Schedulers.io())
-                .map(new Function<MovieResponse, ArrayList<MovieListResult>>() {
+                .map(new Function<MovieResponse, ArrayList<Movie>>() {
                     @Override
-                    public ArrayList<MovieListResult> apply(MovieResponse movieResponse) throws Throwable {
+                    public ArrayList<Movie> apply(MovieResponse movieResponse) throws Throwable {
+                        ArrayList<Movie> moviesList = movieResponse.getResults();
+                        ArrayList<String > genreNames = new ArrayList<>();
+                        // movieListResult from  movieResponse only gives list of genre id's so we will map each id to it genre name here.
+                        for(Movie movie : moviesList){
+                            genreNames.clear();
+                            for(Integer genreId : movie.getGenre_ids()){
+                                    genreNames.add(Constants.getGenreMap().get(genreId));
+                            }
+                            movie.setGenre_names(genreNames);
+                        }
                         return movieResponse.getResults();
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<ArrayList<MovieListResult>>() {
+                .subscribeWith(new DisposableObserver<ArrayList<Movie>>() {
                     @Override
-                    public void onNext(@io.reactivex.rxjava3.annotations.NonNull ArrayList<MovieListResult> movieListResults) {
-                        currentMoviesList.setValue(movieListResults);
+                    public void onNext(@io.reactivex.rxjava3.annotations.NonNull ArrayList<Movie> movies) {
+                        currentMoviesList.setValue(movies);
                     }
 
                     @Override
@@ -138,15 +154,17 @@ public class HomeViewModel extends ViewModel {
     public void getMovieDetails(int movieId, HashMap<String, String> map) {
         disposables.add(repository.getMovieDetails(movieId, map)
                 .subscribeOn(Schedulers.io())
-                .map(new Function<MovieListResult, MovieListResult>() {
+                .map(new Function<Movie, Movie>() {
                     @Override
-                    public MovieListResult apply(MovieListResult movieListResult) throws Throwable {
+                    public Movie apply(Movie movie) throws Throwable {
                         ArrayList<String> genreNames = new ArrayList<>();
-                        for(Genre genre : movieListResult.getGenres()){
+                        // MovieResponse gives list of genre(object) so we will map each id to it genre name here.a
+
+                        for(Genre genre : movie.getGenres()){
                             genreNames.add(genre.getName());
                         }
-                        movieListResult.setGenre_names(genreNames);
-                        return movieListResult;
+                        movie.setGenre_names(genreNames);
+                        return movie;
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -178,6 +196,39 @@ public class HomeViewModel extends ViewModel {
                 .subscribe(result -> actorDetails.setValue(result),
                         error -> Log.e(TAG, "getActorDetails: " + error.getMessage()))
         );
+    }
+
+    public void getQueriedMovies(HashMap<String, String> map){
+        disposables.add(repository.getMoviesBySearch(map)
+                .subscribeOn(Schedulers.io())
+                .map(new Function<JsonObject, ArrayList<Movie>>() {
+                         @Override
+                         public ArrayList<Movie> apply(JsonObject jsonObject) throws Throwable {
+                             JsonArray jsonArray = jsonObject.getAsJsonArray("results");
+                             ArrayList<Movie> movieList = new Gson().fromJson(jsonArray.toString(),
+                                     new TypeToken<ArrayList<Movie>>(){}.getType());
+                             return movieList;
+                         }
+                     }
+                )
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result->queriesMovies.setValue(result),
+                        error-> Log.e(TAG, "getPopularMovies: " + error.getMessage() ))
+        );
+    }
+
+    // room methods
+
+    public void insertMovie(MovieEntity movieEntity){
+        repository.insertMovie(movieEntity);
+    }
+
+    public void deleteMovie(MovieEntity movieEntity){
+        repository.deleteMovie(movieEntity);
+    }
+
+    public void deleteAll(){
+        repository.deleteAll();
     }
 
 

@@ -19,13 +19,26 @@
                     android:id="@+id/searchKeyword"
                     android:textColor="#fff"
                     android:hint="Search"
+                    android:text="sfhjahfjashjfhajskfhjssajfh"
+                    android:gravity="center_vertical"
                     android:paddingLeft="20dp"
+                    android:paddingRight="50dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
                     android:background="@drawable/search_edit_text_bg"
                     android:layout_toLeftOf="@id/filterSearch"
                     android:layout_marginTop="40dp"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="25dp"/>
+                    android:layout_marginBottom="5dp"/>
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_toLeftOf="@id/filterSearch"
+                    android:layout_marginRight="45dp"
+                    android:id="@+id/searchMovie"
+                    android:layout_marginTop="50dp"
+                    android:src="@drawable/ic_search_black_24dp"
+                    android:layout_height="25dp"/>
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -45,11 +58,23 @@
                 android:layout_below="@id/searchLayout"
                 android:layout_margin="10dp"
                 android:id="@+id/currentlyShowing"/>
-            <androidx.viewpager.widget.ViewPager
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View All"
+                android:textColor="#fff"
+                android:id="@+id/viewAllCurrent"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_below="@+id/searchLayout"
+                />
+            <androidx.viewpager2.widget.ViewPager2
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_below="@+id/currentlyShowing"
-                android:layout_margin="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:id="@+id/currentlyShowingViewPager"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -61,6 +86,17 @@
                 android:layout_below="@id/currentlyShowingViewPager"
                 android:layout_margin="10dp"
                 android:id="@+id/upcomingShowing"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View All"
+                android:id="@+id/viewAllUpcoming"
+                android:textColor="#fff"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_below="@+id/currentlyShowingViewPager"
+                />
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,6 +113,17 @@
                 android:layout_below="@id/upcomingRecyclerView"
                 android:layout_margin="10dp"
                 android:id="@+id/popular"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View All"
+                android:textColor="#fff"
+                android:id="@+id/viewAllPopular"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_below="@+id/upcomingRecyclerView"
+                />
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,6 +140,17 @@
                 android:layout_below="@id/popularRecyclerView"
                 android:layout_margin="10dp"
                 android:id="@+id/topRated"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View All"
+                android:textColor="#fff"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:id="@+id/viewAllTopRated"
+                android:layout_below="@+id/popularRecyclerView"
+                />
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

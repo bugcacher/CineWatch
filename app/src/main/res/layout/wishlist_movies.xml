@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#323333"
+    android:background="#373939"
     android:layout_width="match_parent" android:layout_height="match_parent">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Popular"
+        android:text="Your Wishlist"
         android:textColor="#fff"
         android:textStyle="bold"
-        android:textSize="24dp"
+        android:textSize="22dp"
         android:layout_margin="20dp"
-        android:id="@+id/moviesCategoryTitle"/>
+        android:id="@+id/wishListText"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/moviesCategoryTitle"
         android:layout_margin="10dp"
-        android:id="@+id/moviesRecyclerView"/>
+        android:layout_below="@id/wishListText"
+        android:id="@+id/wishListRecyclerView"/>
 
 </RelativeLayout>

@@ -3,6 +3,8 @@ package com.example.cinewatch.di;
 import com.example.cinewatch.Utils.Constants;
 import com.example.cinewatch.network.MovieApiService;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
@@ -21,6 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetworkModule {
 
     @Provides
+    @Singleton
     public static MovieApiService provideMovieApiService(){
         return  new Retrofit.Builder()
                 .baseUrl(Constants.BaseURL)

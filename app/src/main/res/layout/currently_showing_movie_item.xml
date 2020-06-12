@@ -2,14 +2,14 @@
 <RelativeLayout android:layout_height="200dp"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="15dp"
+    android:id="@+id/currentlyShowingLayout"
+    android:layout_margin="5dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/current"
-        android:background="@drawable/background"
+        android:layout_height="200dp"
         android:scaleType="centerCrop"
+        android:background="@drawable/background"
         android:id="@+id/currentlyShowingMovieImage"/>
     <TextView
         android:layout_width="wrap_content"
@@ -17,10 +17,12 @@
         android:id="@+id/currentlyShowingMovieName"
         android:text="SKy Walker"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="15dp"
+       android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        android:maxLines="2"
         android:textColor="#fff"
-        android:textSize="32dp"
+        android:textSize="22dp"
         android:textStyle="bold"
         />
 

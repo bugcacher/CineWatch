@@ -13,11 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cinewatch.Utils.Constants;
 import com.example.cinewatch.databinding.CastItemBinding;
-import com.example.cinewatch.databinding.HomeMovieItemBinding;
-import com.example.cinewatch.model.Actor;
 import com.example.cinewatch.model.Cast;
-import com.example.cinewatch.model.MovieListResult;
-import com.example.cinewatch.ui.Fragments.MovieDetails;
 import com.example.cinewatch.ui.Fragments.MovieDetailsDirections;
 
 import java.util.ArrayList;

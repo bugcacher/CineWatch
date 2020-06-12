@@ -1,16 +1,15 @@
 package com.example.cinewatch.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Abhinav Singh on 09,June,2020
  */
 public class MovieResponse {
     private int page,total_pages,total_results;
-    private ArrayList<MovieListResult> results;
+    private ArrayList<Movie> results;
 
-    public MovieResponse(int page, int total_pages, int total_results, ArrayList<MovieListResult> results) {
+    public MovieResponse(int page, int total_pages, int total_results, ArrayList<Movie> results) {
         this.page = page;
         this.total_pages = total_pages;
         this.total_results = total_results;
@@ -41,11 +40,11 @@ public class MovieResponse {
         this.total_results = total_results;
     }
 
-    public ArrayList<MovieListResult> getResults() {
+    public ArrayList<Movie> getResults() {
         return results;
     }
 
-    public void setResults(ArrayList<MovieListResult> results) {
+    public void setResults(ArrayList<Movie> results) {
         this.results = results;
     }
 

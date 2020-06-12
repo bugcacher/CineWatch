@@ -1,31 +1,19 @@
 package com.example.cinewatch.repository;
 
-import android.util.Log;
-
-import com.example.cinewatch.Utils.Constants;
+import com.example.cinewatch.db.MovieDao;
+import com.example.cinewatch.db.MovieEntity;
 import com.example.cinewatch.model.Actor;
-import com.example.cinewatch.model.MovieListResult;
+import com.example.cinewatch.model.Movie;
 import com.example.cinewatch.model.MovieResponse;
 import com.example.cinewatch.network.MovieApiService;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.inject.Inject;
 
-import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.observers.DisposableObserver;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Abhinav Singh on 10,June,2020
@@ -34,11 +22,13 @@ public class Repository {
     private static final String TAG = "Repository";
 
     MovieApiService apiService;
+    MovieDao movieDao;
 
 
     @Inject
-    public Repository(MovieApiService apiService) {
+    public Repository(MovieApiService apiService, MovieDao movieDao) {
         this.apiService = apiService;
+        this.movieDao = movieDao;
     }
 
     public Observable<MovieResponse>  getCurrentlyShowing(HashMap<String, String> map){
@@ -57,7 +47,7 @@ public class Repository {
         return apiService.getUpcoming(map);
     }
 
-    public Observable<MovieListResult>  getMovieDetails(int movieId,HashMap<String, String> map){
+    public Observable<Movie>  getMovieDetails(int movieId, HashMap<String, String> map){
         return apiService.getMovieDetails(movieId, map);
     }
 
@@ -67,6 +57,28 @@ public class Repository {
     public Observable<Actor>  getActorDetails(int personId, String api_key){
         return apiService.getActorDetails(personId,api_key);
     }
+
+    public Observable<JsonObject> getMoviesBySearch( HashMap<String, String> map){
+        return apiService.getMoviesBySearch(map);
+
+    }
+
+    public void insertMovie(MovieEntity movieEntity){
+        movieDao.insert(movieEntity);
+    }
+
+    public void deleteMovie(MovieEntity movieEntity){
+        movieDao.delete(movieEntity);
+    }
+
+    public void deleteAll(){
+        movieDao.deleteAll();
+    }
+
+    public ArrayList<MovieEntity> getWishList(){
+        return  movieDao.getWishList();
+    }
+
 
 
 

@@ -19,11 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.cinewatch.Utils.Constants;
 import com.example.cinewatch.adapters.CastAdapter;
-import com.example.cinewatch.databinding.HomeLayoutBinding;
 import com.example.cinewatch.databinding.MovieDetailsBinding;
-import com.example.cinewatch.model.Actor;
 import com.example.cinewatch.model.Cast;
-import com.example.cinewatch.model.MovieListResult;
+import com.example.cinewatch.model.Movie;
 import com.example.cinewatch.viewmodel.HomeViewModel;
 
 import java.util.ArrayList;
@@ -64,6 +62,7 @@ public class MovieDetails extends Fragment {
         MovieDetailsArgs args = MovieDetailsArgs.fromBundle(getArguments());
         movieId = args.getMovieId();
 
+
         observeData();
 
         queryMap.put("api_key", Constants.API_KEY);
@@ -82,25 +81,25 @@ public class MovieDetails extends Fragment {
     }
 
     private void observeData() {
-        viewModel.getMovie().observe(getViewLifecycleOwner(), new Observer<MovieListResult>() {
+        viewModel.getMovie().observe(getViewLifecycleOwner(), new Observer<Movie>() {
             @Override
-            public void onChanged(MovieListResult movieListResult) {
-                Glide.with(getContext()).load(Constants.ImageBaseURL + movieListResult.getPoster_path())
+            public void onChanged(Movie movie) {
+                Glide.with(getContext()).load(Constants.ImageBaseURL + movie.getPoster_path())
                         .centerCrop()
                         .into(binding.moviePoster);
 
-                binding.movieName.setText(movieListResult.getTitle());
+                binding.movieName.setText(movie.getTitle());
 
-                hour = movieListResult.getRuntime()/60;
-                min = movieListResult.getRuntime()%60;
+                hour = movie.getRuntime()/60;
+                min = movie.getRuntime()%60;
                 binding.movieRuntime.setText(hour+"h "+min+"m");
-                binding.moviePlot.setText(movieListResult.getOverview());
+                binding.moviePlot.setText(movie.getOverview());
                 temp = "";
-                for (int i = 0; i < movieListResult.getGenres().size(); i++){
-                    if(i ==  movieListResult.getGenres().size() -1)
-                        temp+= movieListResult.getGenres().get(i).getName();
+                for (int i = 0; i < movie.getGenres().size(); i++){
+                    if(i ==  movie.getGenres().size() -1)
+                        temp+= movie.getGenres().get(i).getName();
                     else
-                        temp+= movieListResult.getGenres().get(i).getName() + " | ";
+                        temp+= movie.getGenres().get(i).getName() + " | ";
                 }
 
                 binding.movieGenre.setText(temp);

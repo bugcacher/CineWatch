@@ -5,15 +5,18 @@ import java.util.ArrayList;
 /**
  * Created by Abhinav Singh on 09,June,2020
  */
-public class MovieListResult {
-    private String poster_path,overview,release_date,title;
+public class Movie {
+    private String poster_path,overview,release_date,title,backdrop_path;
     private Integer id,vote_count,runtime;
     private Number popularity,vote_average;
     private ArrayList<Integer> genre_ids;
     private ArrayList<String> genre_names;
     private ArrayList<Genre> genres;
 
-    public MovieListResult(String poster_path, String overview, String release_date, String title, Integer id, Integer vote_count, Number popularity, Number vote_average, ArrayList<Integer> genre_ids, Integer runtime, ArrayList<Genre> genres) {
+    public Movie(String poster_path, String overview, String release_date, String title,
+                 Integer id, Integer vote_count, Number popularity, Number vote_average,
+                 ArrayList<Integer> genre_ids, Integer runtime, ArrayList<Genre> genres,
+                 String backdrop_path) {
         this.poster_path = poster_path;
         this.overview = overview;
         this.release_date = release_date;
@@ -25,6 +28,15 @@ public class MovieListResult {
         this.genre_ids = genre_ids;
         this.runtime = runtime;
         this.genres = genres;
+        this.backdrop_path = backdrop_path;
+    }
+
+    public String getBackdrop_path() {
+        return backdrop_path;
+    }
+
+    public void setBackdrop_path(String backdrop_path) {
+        this.backdrop_path = backdrop_path;
     }
 
     public String getPoster_path() {
