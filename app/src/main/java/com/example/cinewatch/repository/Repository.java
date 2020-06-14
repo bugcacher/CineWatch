@@ -1,7 +1,12 @@
 package com.example.cinewatch.repository;
 
-import com.example.cinewatch.db.MovieDao;
-import com.example.cinewatch.db.MovieEntity;
+import android.util.Log;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
+import com.example.cinewatch.db.WishListDao;
+import com.example.cinewatch.db.WishListMovie;
 import com.example.cinewatch.model.Actor;
 import com.example.cinewatch.model.Movie;
 import com.example.cinewatch.model.MovieResponse;
@@ -10,9 +15,11 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 
 /**
@@ -22,13 +29,14 @@ public class Repository {
     private static final String TAG = "Repository";
 
     MovieApiService apiService;
-    MovieDao movieDao;
+    //MovieDao movieDao;
+    WishListDao wishListDao;
 
 
     @Inject
-    public Repository(MovieApiService apiService, MovieDao movieDao) {
+    public Repository(MovieApiService apiService, WishListDao wishListDao) {
         this.apiService = apiService;
-        this.movieDao = movieDao;
+        this.wishListDao= wishListDao;
     }
 
     public Observable<MovieResponse>  getCurrentlyShowing(HashMap<String, String> map){
@@ -63,20 +71,21 @@ public class Repository {
 
     }
 
-    public void insertMovie(MovieEntity movieEntity){
-        movieDao.insert(movieEntity);
+    public void insertMovie(WishListMovie wishListMovie){
+        Log.e(TAG, "insertMovie: " );
+        wishListDao.insert(wishListMovie);
     }
 
-    public void deleteMovie(MovieEntity movieEntity){
-        movieDao.delete(movieEntity);
+    public void deleteMovie(WishListMovie wishListMovie){
+        wishListDao.delete(wishListMovie);
     }
 
-    public void deleteAll(){
-        movieDao.deleteAll();
-    }
+    //public void deleteAll(){
+//        wishListDao.deleteAll();
+//    }
 
-    public ArrayList<MovieEntity> getWishList(){
-        return  movieDao.getWishList();
+    public LiveData<List<WishListMovie>> getWishList(){
+        return  wishListDao.getWishList();
     }
 
 

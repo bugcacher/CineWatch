@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_home3_to_searchMovies"
             app:destination="@id/searchMovies" />
+        <action
+            android:id="@+id/action_home3_to_wishListFrag"
+            app:destination="@id/wishListFrag" />
     </fragment>
     <fragment
         android:id="@+id/movies"
@@ -57,5 +60,13 @@
         <argument
             android:name="query"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/wishListFrag"
+        android:name="com.example.cinewatch.ui.Fragments.WishListFragment"
+        android:label="WishList" >
+        <action
+            android:id="@+id/action_wishList_to_movieDetails"
+            app:destination="@id/movieDetails" />
     </fragment>
 </navigation>

@@ -6,9 +6,10 @@ import androidx.room.RoomDatabase;
 /**
  * Created by Abhinav Singh on 12,June,2020
  */
-@Database(entities = {MovieEntity.class}, version = 1)
+@Database(entities = {WishListMovie.class}, version = 5,exportSchema = false)
 public abstract class MovieDatabase extends RoomDatabase {
 
-    public abstract MovieDao movieDao();
+   // public abstract MovieDao movieDao();
+    public abstract WishListDao wishListDao();
 
 }

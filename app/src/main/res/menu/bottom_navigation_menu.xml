@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <item
-    android:id="@+id/home"
+    android:id="@+id/home3"
     android:title="Home"
     android:icon="@drawable/home"/>
 <item
-    android:id="@+id/wishlist"
-    android:title="Wishlist"
+    android:id="@+id/wishListFrag"
+    android:title="WishList"
     android:icon="@drawable/wishlist"/>
 <item
     android:id="@+id/profile"

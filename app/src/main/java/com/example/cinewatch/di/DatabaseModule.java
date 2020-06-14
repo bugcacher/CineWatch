@@ -5,8 +5,8 @@ import android.app.Application;
 import androidx.room.Room;
 
 import com.example.cinewatch.Utils.Constants;
-import com.example.cinewatch.db.MovieDao;
 import com.example.cinewatch.db.MovieDatabase;
+import com.example.cinewatch.db.WishListDao;
 
 import javax.inject.Singleton;
 
@@ -34,7 +34,7 @@ public class DatabaseModule {
 
     @Provides
     @Singleton
-    MovieDao provideMovieDao(MovieDatabase movieDatabase){
-        return movieDatabase.movieDao();
+    WishListDao provideWishListDao(MovieDatabase movieDatabase){
+        return movieDatabase.wishListDao();
     }
 }

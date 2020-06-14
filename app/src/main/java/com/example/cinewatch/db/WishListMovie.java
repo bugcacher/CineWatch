@@ -12,17 +12,14 @@ import java.util.ArrayList;
  * Created by Abhinav Singh on 12,June,2020
  */
 @Entity(tableName = "wishlist_table")
-public class MovieEntity {
+public class WishListMovie {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private Integer id;
-
     private String poster_path,overview,release_date,title,backdrop_path;
     private Integer vote_count,runtime;
-    private Number popularity,vote_average;
-    private ArrayList<Genre> genres;
 
-    public MovieEntity(@NonNull  Integer id, String poster_path, String overview, String release_date, String title, String backdrop_path, Integer vote_count, Integer runtime, Number popularity, Number vote_average, ArrayList<Genre> genres) {
+    public WishListMovie (Integer id, String poster_path, String overview, String release_date, String title, String backdrop_path, Integer vote_count, Integer runtime) {
         this.id = id;
         this.poster_path = poster_path;
         this.overview = overview;
@@ -31,9 +28,6 @@ public class MovieEntity {
         this.backdrop_path = backdrop_path;
         this.vote_count = vote_count;
         this.runtime = runtime;
-        this.popularity = popularity;
-        this.vote_average = vote_average;
-        this.genres = genres;
     }
 
     public Integer getId() {
@@ -100,27 +94,4 @@ public class MovieEntity {
         this.runtime = runtime;
     }
 
-    public Number getPopularity() {
-        return popularity;
-    }
-
-    public void setPopularity(Number popularity) {
-        this.popularity = popularity;
-    }
-
-    public Number getVote_average() {
-        return vote_average;
-    }
-
-    public void setVote_average(Number vote_average) {
-        this.vote_average = vote_average;
-    }
-
-    public ArrayList<Genre> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(ArrayList<Genre> genres) {
-        this.genres = genres;
-    }
 }

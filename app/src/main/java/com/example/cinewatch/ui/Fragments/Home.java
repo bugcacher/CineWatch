@@ -123,6 +123,13 @@ public class Home extends Fragment {
                 Navigation.findNavController(view).navigate(action);
             }
         });
+
+        binding.filterSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(HomeDirections.actionHome3ToWishListFrag());
+            }
+        });
     }
 
     private void setUpRecyclerViewsAndViewPager() {
@@ -149,21 +156,18 @@ public class Home extends Fragment {
         viewModel.getCurrentlyShowingList().observe(getViewLifecycleOwner(), new Observer<ArrayList<Movie>>() {
             @Override
             public void onChanged(ArrayList<Movie> movies) {
-                Log.e(TAG, "onChanged: " + movies.get(0).getTitle() );
                 currentlyShowingAdapter.setMovieListResults(movies);
             }
         });
         viewModel.getUpcomingMoviesList().observe(getViewLifecycleOwner(), new Observer<ArrayList<Movie>>() {
             @Override
             public void onChanged(ArrayList<Movie> movies) {
-                Log.e(TAG, "onChanged: " + movies.get(0).getTitle() );
                 upcomingAdapter.setMoviesList(movies);
             }
         });
         viewModel.getTopRatedMoviesList().observe(getViewLifecycleOwner(), new Observer<ArrayList<Movie>>() {
             @Override
             public void onChanged(ArrayList<Movie> movies) {
-                Log.e(TAG, "onChanged: " + movies.get(0).getTitle() );
                 topRatedAdapter.setMoviesList(movies);
 
             }
@@ -171,7 +175,6 @@ public class Home extends Fragment {
         viewModel.getPopularMoviesList().observe(getViewLifecycleOwner(), new Observer<ArrayList<Movie>>() {
             @Override
             public void onChanged(ArrayList<Movie> movies) {
-                Log.e(TAG, "onChanged: " + movies.get(0).getTitle() );
                 popularAdapter.setMoviesList(movies);
 
             }

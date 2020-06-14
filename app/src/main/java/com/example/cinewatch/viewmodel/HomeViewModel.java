@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.cinewatch.Utils.Constants;
-import com.example.cinewatch.db.MovieEntity;
+import com.example.cinewatch.db.WishListMovie;
 import com.example.cinewatch.model.Cast;
 import com.example.cinewatch.model.Genre;
 import com.example.cinewatch.repository.Repository;
@@ -34,6 +34,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
  * Created by Abhinav Singh on 09,June,2020
  */
 public class HomeViewModel extends ViewModel {
+    private static final String TAG = "HomeViewModel";
 
     private Repository repository;
     private MutableLiveData<ArrayList<Movie>> currentMoviesList = new MutableLiveData<>();
@@ -219,16 +220,17 @@ public class HomeViewModel extends ViewModel {
 
     // room methods
 
-    public void insertMovie(MovieEntity movieEntity){
-        repository.insertMovie(movieEntity);
+    public void insertMovie(WishListMovie wishListMovie){
+        Log.e(TAG, "insertMovie: " );
+        repository.insertMovie(wishListMovie);
     }
 
-    public void deleteMovie(MovieEntity movieEntity){
-        repository.deleteMovie(movieEntity);
+    public void deleteMovie(WishListMovie wishListMovie){
+        repository.deleteMovie(wishListMovie);
     }
 
     public void deleteAll(){
-        repository.deleteAll();
+       // repository.deleteAll();
     }
 
 

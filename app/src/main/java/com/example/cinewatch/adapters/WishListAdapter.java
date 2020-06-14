@@ -2,6 +2,7 @@ package com.example.cinewatch.adapters;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,22 +15,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.cinewatch.Utils.Constants;
 import com.example.cinewatch.databinding.HomeMovieItemBinding;
-import com.example.cinewatch.db.MovieEntity;
-import com.example.cinewatch.model.Movie;
+import com.example.cinewatch.db.WishListMovie;
 import com.example.cinewatch.ui.Fragments.HomeDirections;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Abhinav Singh on 09,June,2020
  */
 public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.WishListViewHolder> {
-    private ArrayList<MovieEntity> moviesList;
+    private static final String TAG = "WishListAdapter";
+    private List<WishListMovie> moviesList;
     private Context mContext;
     private HomeMovieItemBinding binding;
 
-    public WishListAdapter(Context mContext, ArrayList<MovieEntity> moviesList) {
+    public WishListAdapter(Context mContext, List<WishListMovie> moviesList) {
         this.mContext = mContext;
         this.moviesList = moviesList;
     }
@@ -61,6 +63,7 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.WishLi
 
             }
         });
+
     }
 
     @Override
@@ -78,7 +81,8 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.WishLi
         }
     }
 
-    public void setMoviesList(ArrayList<MovieEntity> moviesList){
+    public void setMoviesList(List<WishListMovie> moviesList){
+        Log.e(TAG, "setMoviesList: " + "called" );
         this.moviesList = moviesList;
         notifyDataSetChanged();
     }

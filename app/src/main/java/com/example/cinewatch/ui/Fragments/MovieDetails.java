@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,9 +18,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.cinewatch.R;
 import com.example.cinewatch.Utils.Constants;
 import com.example.cinewatch.adapters.CastAdapter;
 import com.example.cinewatch.databinding.MovieDetailsBinding;
+import com.example.cinewatch.db.WishListMovie;
 import com.example.cinewatch.model.Cast;
 import com.example.cinewatch.model.Movie;
 import com.example.cinewatch.viewmodel.HomeViewModel;
@@ -43,6 +46,7 @@ public class MovieDetails extends Fragment {
     private CastAdapter adapter;
     private ArrayList<Cast> castList;
     private int hour =0,min = 0;
+    private  Movie mMovie;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,6 +79,17 @@ public class MovieDetails extends Fragment {
         adapter = new CastAdapter(getContext(),castList);
         binding.castRecyclerView.setAdapter(adapter);
         binding.moviePoster.setClipToOutline(true);
+        binding.addToWishList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                WishListMovie movie = new WishListMovie(mMovie.getId(),mMovie.getPoster_path(),mMovie.getOverview(),
+                        mMovie.getRelease_date(),mMovie.getTitle(),mMovie.getBackdrop_path(),mMovie.getVote_count(),
+                        mMovie.getRuntime());
+                viewModel.insertMovie(movie);
+                binding.addToWishList.setImageResource(R.drawable.ic_playlist_add_check_black_24dp);
+                Toast.makeText(getContext(),"Added to WishList.",Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 
@@ -84,6 +99,7 @@ public class MovieDetails extends Fragment {
         viewModel.getMovie().observe(getViewLifecycleOwner(), new Observer<Movie>() {
             @Override
             public void onChanged(Movie movie) {
+                mMovie = movie;
                 Glide.with(getContext()).load(Constants.ImageBaseURL + movie.getPoster_path())
                         .centerCrop()
                         .into(binding.moviePoster);
