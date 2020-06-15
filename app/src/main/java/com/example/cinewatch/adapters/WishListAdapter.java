@@ -17,6 +17,7 @@ import com.example.cinewatch.Utils.Constants;
 import com.example.cinewatch.databinding.HomeMovieItemBinding;
 import com.example.cinewatch.db.WishListMovie;
 import com.example.cinewatch.ui.Fragments.HomeDirections;
+import com.example.cinewatch.ui.Fragments.WishListFragmentDirections;
 
 
 import java.util.ArrayList;
@@ -57,8 +58,8 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.WishLi
         holder.binding.movieItemRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HomeDirections.ActionHome3ToMovieDetails action = HomeDirections
-                        .actionHome3ToMovieDetails(moviesList.get(position).getId());
+                WishListFragmentDirections.ActionWishListToMovieDetails action =
+                        WishListFragmentDirections.actionWishListToMovieDetails(moviesList.get(position).getId());
                 Navigation.findNavController(view).navigate(action);
 
             }

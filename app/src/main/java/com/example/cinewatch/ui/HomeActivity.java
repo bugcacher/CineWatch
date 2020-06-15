@@ -4,9 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
-import androidx.navigation.NavHostController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -28,6 +26,7 @@ import me.ibrahimsn.lib.SmoothBottomBar;
 public class HomeActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     HomeViewModel viewModel;
+    SmoothBottomBar smoothBottomBar;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -37,13 +36,17 @@ public class HomeActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
         String[] permission = {Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED
             || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
                 requestPermissions(permission,1);
 
         }
+
     }
 
     @Override
@@ -63,9 +66,9 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.bottom_navigation_menu,menu);
-        NavController navController = Navigation.findNavController(this,R.id.fragment);
-        binding.bottomBar.setupWithNavController(menu,navController);
+        menuInflater.inflate(R.menu.bottom_nav_menu,menu);
+        NavController navController = Navigation.findNavController(this,R.id.fragment_host);
+        smoothBottomBar.setupWithNavController(menu,navController);
         return  true;
     }
 }

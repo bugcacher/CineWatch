@@ -38,13 +38,7 @@ public class WishListViewModel extends ViewModel {
         return wishListMoviesList;
     }
 
-    public void getWishListMovies(){
-//        repository.getWishList()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(result-> wishListMoviesList.setValue(result),
-//                        error-> Log.e(TAG, "getWishListMovies: " + error.getMessage() ));
-
-
+    public void clearWishList(){
+        repository.clearWishList();
     }
 }

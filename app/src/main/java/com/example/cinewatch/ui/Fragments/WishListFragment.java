@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,7 +52,17 @@ public class WishListFragment extends Fragment {
         
         intiRecyclerView();
         observeData();
-        //viewModel.getWishListMovies();
+
+        binding.clearWishList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.clearWishList();
+                Toast.makeText(getContext(),"WishList cleared!",Toast.LENGTH_SHORT).show();
+                moviesList.clear();
+                adapter.setMoviesList(moviesList);
+
+            }
+        });
         
     }
 
@@ -66,6 +77,7 @@ public class WishListFragment extends Fragment {
                     Log.e(TAG, "onChanged: " + wishListMovies.get(i).getId() );
                 }
                 adapter.setMoviesList(wishListMovies);
+                moviesList = wishListMovies;
             }
         });
 

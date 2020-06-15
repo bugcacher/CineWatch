@@ -3,6 +3,7 @@ package com.example.cinewatch.viewmodel;
 import android.util.Log;
 
 import androidx.hilt.lifecycle.ViewModelInject;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -45,6 +46,7 @@ public class HomeViewModel extends ViewModel {
     private MutableLiveData<ArrayList<Cast>> movieCastList = new MutableLiveData<>();
     private MutableLiveData<Movie> movieDetails = new MutableLiveData<>();
     private MutableLiveData<Actor> actorDetails = new MutableLiveData<>();
+    private LiveData<WishListMovie> wishListMovie ;
 
     private final io.reactivex.rxjava3.disposables.CompositeDisposable disposables = new CompositeDisposable();
 
@@ -225,12 +227,13 @@ public class HomeViewModel extends ViewModel {
         repository.insertMovie(wishListMovie);
     }
 
-    public void deleteMovie(WishListMovie wishListMovie){
-        repository.deleteMovie(wishListMovie);
+    public void deleteMovie(int movieId){
+        repository.deleteMovie(movieId);
     }
 
-    public void deleteAll(){
-       // repository.deleteAll();
+
+    public WishListMovie getWishListMovie(int movieId){
+        return  repository.getWishListMovie(movieId);
     }
 
 

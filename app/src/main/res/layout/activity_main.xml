@@ -8,7 +8,7 @@
     tools:context=".ui.HomeActivity">
 
     <fragment
-        android:id="@+id/fragment"
+        android:id="@+id/fragment_host"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,13 +17,13 @@
         app:navGraph="@navigation/nav_graph" />
 
     <me.ibrahimsn.lib.SmoothBottomBar
-    android:layout_width="match_parent"
-    android:layout_height="70dp"
-    android:layout_alignParentBottom="true"
-    android:id="@+id/bottomBar"
-    app:backgroundColor="#1C1B1B"
-    app:indicatorColor="#BF1407"
-    app:textColor="#fff"
-    app:menu="@menu/bottom_navigation_menu"
-    />
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottomBar"
+        app:backgroundColor="#1C1B1B"
+        app:indicatorColor="#BF1407"
+        app:menu="@menu/bottom_nav_menu"
+        app:textColor="#fff"
+        />
 </RelativeLayout>

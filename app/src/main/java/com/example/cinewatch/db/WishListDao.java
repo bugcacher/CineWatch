@@ -21,9 +21,16 @@ public interface WishListDao {
     @Insert
     void insert(WishListMovie wishListMovie);
 
-    @Delete
-    void delete(WishListMovie wishListMovie);
+    @Query("DELETE From wishlist_table WHERE id = :movieId")
+    void delete(int movieId);
+
+    @Query("DELETE FROM wishlist_table")
+    void clearWishList();
 
     @Query("SELECT * FROM wishlist_table")
     LiveData<List<WishListMovie>> getWishList();
+
+    @Query("SELECT * FROM wishlist_table WHERE id = :movieId ")
+    WishListMovie getWishListMovie(int movieId);
+
 }

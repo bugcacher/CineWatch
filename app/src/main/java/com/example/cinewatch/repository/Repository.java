@@ -76,16 +76,20 @@ public class Repository {
         wishListDao.insert(wishListMovie);
     }
 
-    public void deleteMovie(WishListMovie wishListMovie){
-        wishListDao.delete(wishListMovie);
+    public void deleteMovie(int movieId){
+        wishListDao.delete(movieId);
     }
 
-    //public void deleteAll(){
-//        wishListDao.deleteAll();
-//    }
+    public void clearWishList(){
+        wishListDao.clearWishList();
+    }
 
     public LiveData<List<WishListMovie>> getWishList(){
         return  wishListDao.getWishList();
+    }
+
+    public WishListMovie getWishListMovie(int movieId){
+        return wishListDao.getWishListMovie(movieId);
     }
 
 

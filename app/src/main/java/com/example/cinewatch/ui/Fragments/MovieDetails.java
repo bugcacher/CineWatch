@@ -47,6 +47,7 @@ public class MovieDetails extends Fragment {
     private ArrayList<Cast> castList;
     private int hour =0,min = 0;
     private  Movie mMovie;
+    private Boolean inWishList = false;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class MovieDetails extends Fragment {
 
 
         observeData();
+        isMovieInWishList(movieId);
 
         queryMap.put("api_key", Constants.API_KEY);
         queryMap.put("page","1");
@@ -82,17 +84,37 @@ public class MovieDetails extends Fragment {
         binding.addToWishList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                WishListMovie movie = new WishListMovie(mMovie.getId(),mMovie.getPoster_path(),mMovie.getOverview(),
-                        mMovie.getRelease_date(),mMovie.getTitle(),mMovie.getBackdrop_path(),mMovie.getVote_count(),
-                        mMovie.getRuntime());
-                viewModel.insertMovie(movie);
-                binding.addToWishList.setImageResource(R.drawable.ic_playlist_add_check_black_24dp);
-                Toast.makeText(getContext(),"Added to WishList.",Toast.LENGTH_SHORT).show();
+                if(inWishList){
+                    viewModel.deleteMovie(movieId);
+                    binding.addToWishList.setImageResource(R.drawable.ic_playlist_add_black_24dp);
+                    Toast.makeText(getContext(),"Removed from WishList.",Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    WishListMovie movie = new WishListMovie(mMovie.getId(),mMovie.getPoster_path(),mMovie.getOverview(),
+                            mMovie.getRelease_date(),mMovie.getTitle(),mMovie.getBackdrop_path(),mMovie.getVote_count(),
+                            mMovie.getRuntime());
+                    viewModel.insertMovie(movie);
+                    binding.addToWishList.setImageResource(R.drawable.ic_playlist_add_check_black_24dp);
+                    Toast.makeText(getContext(),"Added to WishList.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
 
 
+    }
+
+    private void isMovieInWishList(int movieId) {
+        if(viewModel.getWishListMovie(movieId) != null) {
+            binding.addToWishList.setImageResource(R.drawable.ic_playlist_add_check_black_24dp);
+            inWishList = true;
+        }
+        else {
+            binding.addToWishList.setImageResource(R.drawable.ic_playlist_add_black_24dp);
+            inWishList = false;
+        }
+        binding.addToWishList.setVisibility(View.VISIBLE);
     }
 
     private void observeData() {

@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#373939"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your Wishlist"
-        android:textColor="#fff"
-        android:textStyle="bold"
-        android:textSize="22dp"
-        android:layout_margin="20dp"
-        android:id="@+id/wishListText"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_below="@id/wishListText"
-        android:id="@+id/wishListRecyclerView"/>
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="#373939"
+        android:layout_width="match_parent" android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Wishlist"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:textSize="22dp"
+            android:layout_margin="20dp"
+            android:id="@+id/wishListText"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_below="@id/wishListText"
+            android:id="@+id/wishListRecyclerView"/>
 
-</RelativeLayout>
+    </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:id="@+id/clearWishList"
+        app:borderWidth="0dp"
+        android:backgroundTint="#780A02"
+        android:src="@drawable/ic_delete_sweep_black_24dp"
+        android:foregroundGravity="center"
+        android:layout_margin="30dp"
+        android:layout_height="wrap_content"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
