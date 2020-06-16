@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/home3"
+    <item android:id="@+id/home2"
         android:title="Home"
         android:icon="@drawable/home"/>
-    <item android:id="@+id/wishlist"
+    <item android:id="@+id/wishListFragment"
         android:title="WishList"
         android:icon="@drawable/wishlist"/>
-    <item android:id="@+id/movieDetails"
+    <item android:id="@+id/profile"
         android:title="Profile"
         android:icon="@drawable/user"/>
 

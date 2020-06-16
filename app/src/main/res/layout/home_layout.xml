@@ -19,7 +19,7 @@
                     android:id="@+id/searchKeyword"
                     android:textColor="#fff"
                     android:hint="Search"
-                    android:text="sfhjahfjashjfhajskfhjssajfh"
+                    android:textColorHint="#fff"
                     android:gravity="center_vertical"
                     android:paddingLeft="20dp"
                     android:paddingRight="50dp"
@@ -34,9 +34,9 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_toLeftOf="@id/filterSearch"
-                    android:layout_marginRight="45dp"
+                    android:layout_marginRight="40dp"
                     android:id="@+id/searchMovie"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="48dp"
                     android:src="@drawable/ic_search_black_24dp"
                     android:layout_height="25dp"/>
                 <ImageView

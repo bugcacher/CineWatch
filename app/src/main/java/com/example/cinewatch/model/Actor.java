@@ -1,5 +1,9 @@
 package com.example.cinewatch.model;
 
+import com.google.gson.JsonObject;
+
+import java.util.ArrayList;
+
 /**
  * Created by Abhinav Singh on 10,June,2020
  */
@@ -7,8 +11,19 @@ public class Actor {
     private String birthday,name,biography,place_of_birth,profile_path,known_for_department;
     private Number popularity;
     private Integer id;
+    private JsonObject movie_credits;
 
-    public Actor(String birthday, String name, String biography, String place_of_birth, String profile_path, String known_for_department, Integer id, Number popularity) {
+    public JsonObject getMovie_credits() {
+        return movie_credits;
+    }
+
+    public void setMovie_credits(JsonObject movie_credits) {
+        this.movie_credits = movie_credits;
+    }
+
+    public Actor(String birthday, String name, String biography, String place_of_birth,
+                 String profile_path, String known_for_department, Integer id,
+                 Number popularity, JsonObject movie_credits) {
         this.birthday = birthday;
         this.name = name;
         this.biography = biography;
@@ -17,6 +32,8 @@ public class Actor {
         this.known_for_department = known_for_department;
         this.id = id;
         this.popularity = popularity;
+        this.movie_credits = movie_credits;
+
     }
 
     public String getBirthday() {

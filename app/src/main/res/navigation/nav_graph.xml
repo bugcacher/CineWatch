@@ -12,10 +12,12 @@
             app:destination="@id/movieDetails" />
         <action
             android:id="@+id/action_home3_to_movies"
-            app:destination="@id/movies" />
+            app:destination="@id/movies"
+            app:exitAnim="@anim/fragment_fade_exit" />
         <action
             android:id="@+id/action_home3_to_searchMovies"
-            app:destination="@id/searchMovies" />
+            app:destination="@id/searchMovies"
+            app:exitAnim="@anim/fragment_close_exit" />
     </fragment>
     <fragment
         android:id="@+id/movies"
@@ -23,7 +25,8 @@
         android:label="Movies">
         <action
             android:id="@+id/action_movies_to_movieDetails"
-            app:destination="@id/movieDetails" />
+            app:destination="@id/movieDetails"
+            app:enterAnim="@anim/fragment_open_enter" />
         <argument
             android:name="movieCategory"
             android:defaultValue="Popular"
@@ -46,7 +49,8 @@
         android:label="MovieDetails">
         <action
             android:id="@+id/action_movieDetails_to_actorDetails"
-            app:destination="@id/actorDetails" />
+            app:destination="@id/actorDetails"
+            app:exitAnim="@android:anim/slide_out_right" />
         <argument
             android:name="movieId"
             app:argType="integer" />

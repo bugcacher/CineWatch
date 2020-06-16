@@ -7,23 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.HomeActivity">
 
+
     <fragment
-        android:id="@+id/fragment_host"
+        android:id="@+id/fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        android:layout_above="@id/bottomBar"
+        android:layout_above="@id/smoothBar"
         app:navGraph="@navigation/nav_graph" />
-
     <me.ibrahimsn.lib.SmoothBottomBar
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/bottomBar"
         app:backgroundColor="#1C1B1B"
         app:indicatorColor="#BF1407"
-        app:menu="@menu/bottom_nav_menu"
         app:textColor="#fff"
-        />
+        app:menu="@menu/bottom_nav_menu"
+        android:id="@+id/smoothBar"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

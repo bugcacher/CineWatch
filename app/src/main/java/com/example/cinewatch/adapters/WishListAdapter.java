@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide;
 import com.example.cinewatch.Utils.Constants;
 import com.example.cinewatch.databinding.HomeMovieItemBinding;
 import com.example.cinewatch.db.WishListMovie;
-import com.example.cinewatch.ui.Fragments.HomeDirections;
 import com.example.cinewatch.ui.Fragments.WishListFragmentDirections;
 
 

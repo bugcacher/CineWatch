@@ -48,7 +48,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
     public void onBindViewHolder(@NonNull ViewPagerViewHolder holder, int position) {
         Log.e(TAG, "onBindViewHolder: " + movieList.get(position).getTitle() );
         holder.binding.currentlyShowingMovieName.setText(movieList.get(position).getTitle());
-        Glide.with(mContext).load(Constants.ImageBaseURLw780 + movieList.get(position).getBackdrop_path())
+        Glide.with(mContext).load(Constants.ImageBaseURL+ movieList.get(position).getBackdrop_path())
                 .into(holder.binding.currentlyShowingMovieImage);
         holder.binding.currentlyShowingLayout.setOnClickListener(new View.OnClickListener() {
             @Override

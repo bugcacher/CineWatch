@@ -127,7 +127,7 @@ public class Home extends Fragment {
         binding.filterSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(HomeDirections.actionHome3ToWishListFrag());
+                //Navigation.findNavController(view).navigate(HomeDirections.actionHome3ToWishListFrag());
             }
         });
     }

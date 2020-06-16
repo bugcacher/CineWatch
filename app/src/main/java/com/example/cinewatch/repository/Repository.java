@@ -62,8 +62,8 @@ public class Repository {
     public Observable<JsonObject>  getCast(int movieId, HashMap<String, String> map){
         return apiService.getCast(movieId,map);
     }
-    public Observable<Actor>  getActorDetails(int personId, String api_key){
-        return apiService.getActorDetails(personId,api_key);
+    public Observable<Actor>  getActorDetails(int personId,HashMap<String,String> map){
+        return apiService.getActorDetails(personId,map);
     }
 
     public Observable<JsonObject> getMoviesBySearch( HashMap<String, String> map){

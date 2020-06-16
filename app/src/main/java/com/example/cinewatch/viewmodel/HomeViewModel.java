@@ -94,16 +94,6 @@ public class HomeViewModel extends ViewModel {
                 .map(new Function<MovieResponse, ArrayList<Movie>>() {
                     @Override
                     public ArrayList<Movie> apply(MovieResponse movieResponse) throws Throwable {
-                        ArrayList<Movie> moviesList = movieResponse.getResults();
-                        ArrayList<String > genreNames = new ArrayList<>();
-                        // movieListResult from  movieResponse only gives list of genre id's so we will map each id to it genre name here.
-                        for(Movie movie : moviesList){
-                            genreNames.clear();
-                            for(Integer genreId : movie.getGenre_ids()){
-                                    genreNames.add(Constants.getGenreMap().get(genreId));
-                            }
-                            movie.setGenre_names(genreNames);
-                        }
                         return movieResponse.getResults();
                     }
                 })
@@ -192,8 +182,8 @@ public class HomeViewModel extends ViewModel {
         );
     }
 
-    public void getActorDetails(int personId, String api_key) {
-        disposables.add(repository.getActorDetails(personId, api_key)
+    public void getActorDetails(int personId, HashMap<String,String> map) {
+        disposables.add(repository.getActorDetails(personId, map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> actorDetails.setValue(result),

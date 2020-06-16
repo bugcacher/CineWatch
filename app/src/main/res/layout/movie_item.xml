@@ -1,68 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="10dp"
-    android:id="@+id/movieItemCardView"
+<RelativeLayout
     android:background="@drawable/background"
+    android:layout_width="wrap_content"
+    android:id="@+id/movieItemLayout"
+    android:layout_margin="5dp"
+    android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <RelativeLayout
-        android:background="@color/colorPrimaryDark"
+    <TextView
+        android:layout_width="120dp"
+        android:singleLine="true"
+        android:layout_height="25dp"
+        android:background="#8F0E04"
+        android:gravity="center"
+        android:alpha="0.9"
+        android:rotation="-45"
+        android:elevation="10dp"
+        android:translationX="-35dp"
+        android:translationY="9dp"
+        android:id="@+id/movieYear"
+        android:textColor="#fff"/>
+
+    <ImageView
+        android:layout_width="190dp"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/movieImage"/>
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="120dp"
-            android:singleLine="true"
-            android:layout_height="25dp"
-            android:background="#8F0E04"
-            android:gravity="center"
-            android:alpha="0.9"
-            android:rotation="-45"
-            android:elevation="10dp"
-            android:translationX="-35dp"
-            android:translationY="9dp"
-            android:id="@+id/movieYear"
-            android:textColor="#fff"/>
-
-        <ImageView
-            android:layout_width="190dp"
-            android:layout_height="200dp"
-            android:src="@drawable/movie_poster"
-            android:scaleType="centerCrop"
-            android:layout_margin="2dp"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/movieImage"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:layout_below="@id/movieImage"
-            android:textColor="#fff"
-            android:layout_centerHorizontal="true"
-            android:text="Blade Runner 2049"
-            android:id="@+id/movieName"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/movieName"
-            android:textColor="#CDC7C7"
-            android:textSize="10dp"
-            android:layout_margin="5dp"
-            android:layout_centerHorizontal="true"
-            android:text="Action | Thriller | Drama"
-            android:id="@+id/movieGenre"/>
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style = "?android:attr/ratingBarStyleSmall"
-            android:id="@+id/movieRating"
-            android:layout_marginBottom="5dp"
-            android:stepSize="0.5"
-            android:numStars="5"
-            android:theme="@style/RatingBar"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/movieGenre"/>
-    </RelativeLayout>
-
-</androidx.cardview.widget.CardView>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:textStyle="bold"
+        android:layout_below="@id/movieImage"
+        android:textColor="#fff"
+        android:layout_centerHorizontal="true"
+        android:text="Blade Runner 2049"
+        android:id="@+id/movieName"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/movieName"
+        android:textColor="#CDC7C7"
+        android:textSize="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:text="Action | Thriller | Drama "
+        android:id="@+id/movieGenre"/>
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style = "?android:attr/ratingBarStyleSmall"
+        android:id="@+id/movieRating"
+        android:layout_marginBottom="5dp"
+        android:stepSize="0.5"
+        android:numStars="5"
+        android:theme="@style/RatingBar"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/movieGenre"/>
+</RelativeLayout>

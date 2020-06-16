@@ -70,14 +70,17 @@ public class WishListFragment extends Fragment {
         viewModel.getWishListMoviesList().observe(getViewLifecycleOwner(), new Observer<List<WishListMovie>>() {
             @Override
             public void onChanged(List<WishListMovie> wishListMovies) {
-                for(int i = 0 ;i < wishListMovies.size();i++){
-                    Log.e(TAG, "onChanged: " + wishListMovies.get(i).getTitle() );
-                    Log.e(TAG, "onChanged: " + wishListMovies.get(i).getOverview() );
-                    Log.e(TAG, "onChanged: " + wishListMovies.get(i).getVote_count() );
-                    Log.e(TAG, "onChanged: " + wishListMovies.get(i).getId() );
+                if (wishListMovies.size() == 0 || wishListMovies == null){
+                    binding.placeHolderText.setVisibility(View.VISIBLE);
+                    binding.noItemsPlaceHolder.setVisibility(View.VISIBLE);
                 }
-                adapter.setMoviesList(wishListMovies);
-                moviesList = wishListMovies;
+                else{
+                    binding.placeHolderText.setVisibility(View.GONE);
+                    binding.noItemsPlaceHolder.setVisibility(View.GONE);
+                    adapter.setMoviesList(wishListMovies);
+                    moviesList = wishListMovies;
+                }
+
             }
         });
 

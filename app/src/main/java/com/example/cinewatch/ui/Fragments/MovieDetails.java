@@ -1,5 +1,7 @@
 package com.example.cinewatch.ui.Fragments;
 
+import android.annotation.SuppressLint;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,7 +27,14 @@ import com.example.cinewatch.databinding.MovieDetailsBinding;
 import com.example.cinewatch.db.WishListMovie;
 import com.example.cinewatch.model.Cast;
 import com.example.cinewatch.model.Movie;
+import com.example.cinewatch.model.Video;
+import com.example.cinewatch.ui.dialog.VideoDialog;
 import com.example.cinewatch.viewmodel.HomeViewModel;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,12 +51,13 @@ public class MovieDetails extends Fragment {
     private HomeViewModel viewModel;
     private Integer movieId;
     private HashMap<String, String> queryMap;
-    private String temp;
+    private String temp,videoId;
     private CastAdapter adapter;
     private ArrayList<Cast> castList;
     private int hour =0,min = 0;
     private  Movie mMovie;
     private Boolean inWishList = false;
+    private ArrayList<Video> videos;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,10 +79,10 @@ public class MovieDetails extends Fragment {
 
 
         observeData();
-        isMovieInWishList(movieId);
 
         queryMap.put("api_key", Constants.API_KEY);
         queryMap.put("page","1");
+        queryMap.put("append_to_response","videos");
 
         viewModel.getMovieDetails(movieId,queryMap);
         viewModel.getCast(movieId,queryMap);
@@ -101,7 +111,18 @@ public class MovieDetails extends Fragment {
             }
         });
 
-
+        binding.playTrailer.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SourceLockedOrientationActivity")
+            @Override
+            public void onClick(View view) {
+                if(videoId != null){
+                    VideoDialog dialog = new VideoDialog(videoId);
+                    dialog.show(getParentFragmentManager(),"Video Dialog");
+                }
+                else
+                    Toast.makeText(getContext(),"Sorry trailer not found!",Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -144,6 +165,11 @@ public class MovieDetails extends Fragment {
                 binding.playTrailer.setVisibility(View.VISIBLE);
                 binding.movieCastText.setVisibility(View.VISIBLE);
                 binding.moviePlotText.setVisibility(View.VISIBLE);
+                isMovieInWishList(movieId);
+
+                JsonArray array = movie.getVideos().getAsJsonArray("results");
+                videoId = array.get(0).getAsJsonObject().get("key").getAsString();
+
             }
         });
 
@@ -153,6 +179,7 @@ public class MovieDetails extends Fragment {
                 Log.e(TAG, "onChanged: " + actors.size() );
                 adapter.setCastList(actors);
                 adapter.notifyDataSetChanged();
+
             }
         });
     }

@@ -1,5 +1,7 @@
 package com.example.cinewatch.model;
 
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 
 /**
@@ -12,11 +14,12 @@ public class Movie {
     private ArrayList<Integer> genre_ids;
     private ArrayList<String> genre_names;
     private ArrayList<Genre> genres;
+    private JsonObject videos ;
 
     public Movie(String poster_path, String overview, String release_date, String title,
                  Integer id, Integer vote_count, Number popularity, Number vote_average,
                  ArrayList<Integer> genre_ids, Integer runtime, ArrayList<Genre> genres,
-                 String backdrop_path) {
+                 String backdrop_path,JsonObject videos ) {
         this.poster_path = poster_path;
         this.overview = overview;
         this.release_date = release_date;
@@ -29,6 +32,15 @@ public class Movie {
         this.runtime = runtime;
         this.genres = genres;
         this.backdrop_path = backdrop_path;
+        this.videos = videos;
+    }
+
+    public JsonObject getVideos() {
+        return videos;
+    }
+
+    public void setVideos(JsonObject videos) {
+        this.videos = videos;
     }
 
     public String getBackdrop_path() {

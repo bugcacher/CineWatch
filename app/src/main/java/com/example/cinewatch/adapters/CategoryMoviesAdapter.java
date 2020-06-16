@@ -1,6 +1,7 @@
 package com.example.cinewatch.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
  * Created by Abhinav Singh on 09,June,2020
  */
 public class CategoryMoviesAdapter extends RecyclerView.Adapter<CategoryMoviesAdapter.CategoryMovieRecyclerViewHolder> {
+    private static final String TAG = "CategoryMoviesAdapter";
     private ArrayList<Movie> moviesList;
     private Context mContext;
     private MovieItemBinding binding;
@@ -42,22 +44,25 @@ public class CategoryMoviesAdapter extends RecyclerView.Adapter<CategoryMoviesAd
     @Override
     public void onBindViewHolder(@NonNull CategoryMovieRecyclerViewHolder holder, int position) {
         holder.binding.movieName.setText(moviesList.get(position).getTitle());
+
         temp = "";
-//        for (int i = 0; i < moviesList.get(position).getGenre_names().size(); i++){
-//            if(i ==  moviesList.get(position).getGenre_names().size() -1)
-//                temp+= moviesList.get(position).getGenre_names().get(i);
-//            else
-//                temp+= moviesList.get(position).getGenre_names().get(i) + " | ";
-//        }
+
+        for (int i = 0; i < moviesList.get(position).getGenre_ids().size(); i++){
+            if(i ==  moviesList.get(position).getGenre_ids().size() -1)
+                temp+= Constants.getGenreMap().get(moviesList.get(position).getGenre_ids().get(i));
+            else
+                temp+= Constants.getGenreMap().get(moviesList.get(position).getGenre_ids().get(i)) + " | ";
+        }
+
         holder.binding.movieGenre.setText(temp);
         holder.binding.movieRating.setRating(moviesList.get(position).getVote_average().floatValue()/2);
         String[] movieYear = moviesList.get(position).getRelease_date()
                 .split("-");
         holder.binding.movieYear.setText(movieYear[0]);
-        Glide.with(mContext).load(Constants.ImageBaseURLw500 + moviesList.get(position).getPoster_path())
+        Glide.with(mContext).load(Constants.ImageBaseURL + moviesList.get(position).getPoster_path())
         .into(holder.binding.movieImage);
 
-        holder.binding.movieItemCardView.setOnClickListener(new View.OnClickListener() {
+        holder.binding.movieItemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MoviesDirections.ActionMoviesToMovieDetails action =
@@ -65,6 +70,8 @@ public class CategoryMoviesAdapter extends RecyclerView.Adapter<CategoryMoviesAd
                 Navigation.findNavController(view).navigate(action);
             }
         });
+
+        holder.binding.movieItemLayout.setClipToOutline(true);
 
     }
 
