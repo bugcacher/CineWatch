@@ -16,7 +16,7 @@ Cine Watch is built on MVVM architecture.
 - [ViewBinding](https://developer.android.com/topic/libraries/view-binding)
 - [Retrofit](https://square.github.io/retrofit/#:~:text=Retrofit%20Configuration,are%20turned%20into%20callable%20objects.)
 - [Room](https://developer.android.com/training/data-storage/room)
-- [Navigation Component] (https://developer.android.com/guide/navigation/navigation-getting-started)
+- [Navigation Component](https://developer.android.com/guide/navigation/navigation-getting-started)
 - [Android Youtube Video Player](https://github.com/PierfrancescoSoffritti/android-youtube-player)
 - [SmoothBottomBar](https://github.com/ibrahimsn98/SmoothBottomBar)
 
