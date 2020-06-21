@@ -1,9 +1,12 @@
 package com.example.cinewatch.ui.Fragments;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -73,6 +76,20 @@ public class SearchMovies extends Fragment {
                 queryMap.put("query",queryText);
 
                 viewModel.getQueriedMovies(queryMap);
+            }
+        });
+        binding.searchKeyword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                    queryText = binding.searchKeyword.getText().toString().trim().toLowerCase();
+                    queryMap.clear();
+                    queryMap.put("api_key", Constants.API_KEY);
+                    queryMap.put("query",queryText);
+
+                    viewModel.getQueriedMovies(queryMap);
+                }
+                return false;
             }
         });
     }

@@ -3,9 +3,12 @@ package com.example.cinewatch.ui.Fragments;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -63,11 +66,12 @@ public class Home extends Fragment {
 
         viewModel = new ViewModelProvider(Home.this).get(HomeViewModel.class);
 
-        observeData();
-
         HashMap<String,String> map = new HashMap<>();
         map.put("api_key",Constants.API_KEY);
         map.put("page","1");
+
+        observeData();
+
 
         viewModel.getCurrentlyShowingMovies(map);
         viewModel.getUpcomingMovies(map);
@@ -76,6 +80,19 @@ public class Home extends Fragment {
         setUpRecyclerViewsAndViewPager();
 
         setUpOnclick();
+        binding.searchKeyword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                    HomeDirections.ActionHome3ToSearchMovies action =
+                            HomeDirections.actionHome3ToSearchMovies(binding.searchKeyword.getText().toString()
+                                    .toLowerCase().trim());
+                    Navigation.findNavController(view).navigate(action);
+                }
+                return false;
+            }
+        });
+
 
 
     }

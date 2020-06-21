@@ -19,6 +19,8 @@
                     android:id="@+id/searchKeyword"
                     android:textColor="#fff"
                     android:hint="Search"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
                     android:textColorHint="#fff"
                     android:gravity="center_vertical"
                     android:paddingLeft="20dp"
