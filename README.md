@@ -22,3 +22,8 @@ Cine Watch is built on MVVM architecture.
 
 ## API used:
 - [TMDB](https://developers.themoviedb.org/)
+
+### Support by clicking :star: if you find this helpful :smiley:
+
+## Author
+Maintained by [Abhinav Singh](https://www.github.com/abhinav0612) :sunglasses:
